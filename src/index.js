@@ -16,5 +16,5 @@ app.use("/users", userRoute)
 app.use("/shortLinks", shortLinkRoute)
 
 app.listen(port, () => {
-    console.log(`Servidor rodando na porta ${port}`)
+    console.log(`Server running on port ${port}.`)
 })

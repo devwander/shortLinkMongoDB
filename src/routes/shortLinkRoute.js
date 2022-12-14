@@ -7,5 +7,6 @@ router.post('/', shortLinkController.create)
 router.get('/', shortLinkController.find)
 router.get('/:hash', shortLinkController.findByHash)
 router.get('/user/:id', shortLinkController.findById)
+router.delete('/:hash', shortLinkController.delete)
 
 module.exports = router

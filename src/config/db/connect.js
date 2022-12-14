@@ -1,12 +1,22 @@
 const mongoose = require('mongoose')
 
 function connect () {
-    mongoose.connect('mongodb://localhost:27017/test')
-        .then((dbo) => {
-            console.log("DataBase connected")
-        }, (error) => {
-            console.log(error)
-        });
+    mongoose.set("strictQuery", true);
+    
+    mongoose.connect('mongodb://localhost:27017/test', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+
+    const db = mongoose.connection;
+    
+    db.on('error', (error) => {
+        console.error(error);
+    });
+
+    db.once('open', () => {
+        console.log('Connected to database.');
+    });
 }
 
 module.exports = connect

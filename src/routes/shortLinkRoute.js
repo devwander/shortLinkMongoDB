@@ -3,10 +3,12 @@ const router = new Router()
 
 const shortLinkController = require('../controllers/shortLinkController')
 
-router.post('/', shortLinkController.create)
-router.get('/', shortLinkController.find)
-router.get('/:hash', shortLinkController.findByHash)
-router.get('/user/:id', shortLinkController.findById)
-router.delete('/:hash', shortLinkController.delete)
+const validateJwtMiddleware = require('../middlewares/validateJwtMiddleware')
+
+router.post('/', validateJwtMiddleware.validateJWT, shortLinkController.create)
+router.get('/', validateJwtMiddleware.validateJWT, shortLinkController.find)
+router.get('/:hash', validateJwtMiddleware.validateJWT, shortLinkController.findByHash)
+router.get('/user/:id', validateJwtMiddleware.validateJWT, shortLinkController.findById)
+router.delete('/:hash', validateJwtMiddleware.validateJWT, shortLinkController.delete)
 
 module.exports = router

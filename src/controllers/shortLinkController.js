@@ -7,7 +7,8 @@ const url = require('url')
 
 exports.create = async (req, res) => {
     try {
-        const { userId, originalLink } = req.body
+        const originalLink = req.body.originalLink
+        const userId = req.userInfo.id
 
         const parseURL = url.parse(originalLink);
 
@@ -44,7 +45,7 @@ exports.create = async (req, res) => {
                             }
                         })
                     } else {
-                        res.status(403).json({
+                        res.status(400).json({
                             message: "ShortLink already exists"
                         })
                     }
@@ -139,7 +140,7 @@ exports.findById = async (req, res) => {
 exports.delete = async (req, res) => {
     try {
         const hash = req.params.hash
-        const userId = req.body.userId
+        const userId = req.userInfo.id
 
         if (ObjectId.isValid(userId)) {
 

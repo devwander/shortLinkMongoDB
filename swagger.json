@@ -1,0 +1,24 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "ShortLink",
+        "description": "API documentation that shortens links",
+        "version": "1.0.0"
+    },
+    "basePath": "/",
+    "paths": {
+        "/": {
+            "get": {
+                "description": "Route that returns API health message",
+                "sumary": "Returns message",
+                "tags": ["Home"],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    }
+}

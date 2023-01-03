@@ -28,10 +28,7 @@ exports.createToken = async (req, res) => {
                     res.set("x-access-token", token)
                     res.end()
                 })
-            }
-
-            if (error) {
-                console.log(error)
+            } else {
                 res.status(400).json({
                     message: "Incorrect email or password."
                 })

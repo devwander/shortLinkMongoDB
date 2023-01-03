@@ -11,11 +11,54 @@
             "get": {
                 "description": "Route that returns API health message",
                 "sumary": "Returns message",
-                "tags": ["Home"],
+                "tags": [
+                    "Home"
+                ],
                 "parameters": [],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK."
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "description": "API login route",
+                "sumary": "Login route",
+                "tags": [
+                    "Login"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "email": "wanderson@email.com",
+                                    "password": "123456"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login performed and JWT token generated."
+                    },
+                    "400": {
+                        "description": "Incorrect email or password. | User not found."
+                    },
+                    "500": {
+                        "description": "JWT generate error."
                     }
                 }
             }

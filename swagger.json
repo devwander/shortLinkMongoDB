@@ -5,6 +5,17 @@
         "description": "API documentation that shortens links",
         "version": "1.0.0"
     },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "Authorization",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+              }
+          }
+    },
     "basePath": "/",
     "paths": {
         "/": {
@@ -59,6 +70,31 @@
                     },
                     "500": {
                         "description": "JWT generate error."
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "description": "API route responsible for fetching all registered users",
+                "sumary": "Return users",
+                "tags": [
+                    "Users"
+                ],
+                "security": [{"bearerAuth": []}],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success."
+                    },
+                    "400": {
+                        "description": "Users not found."
+                    },
+                    "403": {
+                        "description": "Forbidden."
+                    },
+                    "500": {
+                        "description": "Internal Server Error."
                     }
                 }
             }

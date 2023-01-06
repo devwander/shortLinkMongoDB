@@ -21,7 +21,6 @@
         "/": {
             "get": {
                 "description": "Route that returns API health message",
-                "sumary": "Returns message",
                 "tags": [
                     "Home"
                 ],
@@ -76,7 +75,7 @@
         },
         "/users": {
             "get": {
-                "description": "API route responsible for fetching all registered users",
+                "description": "API route responsible for fetching all registered users <strong>(*Admin account required)</strong>",
                 "sumary": "Return users",
                 "tags": [
                     "Users"
@@ -95,6 +94,49 @@
                     },
                     "500": {
                         "description": "Internal Server Error."
+                    }
+                }
+            },
+            "post": {
+                "description": "User creation wheel in API",
+                "sumary": "Route to create users",
+                "tags": [
+                    "Users"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "Test",
+                                    "email": "teste@email.com",
+                                    "password": "123456"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success."
+                    },
+                    "400": {
+                        "description": "Error creating user."
+                    },
+                    "500": {
+                        "description": "Internal server error."
                     }
                 }
             }

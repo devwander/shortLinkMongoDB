@@ -13,8 +13,8 @@
                 "name": "Authorization",
                 "scheme": "bearer",
                 "bearerFormat": "JWT"
-              }
-          }
+            }
+        }
     },
     "basePath": "/",
     "paths": {
@@ -80,7 +80,11 @@
                 "tags": [
                     "Users"
                 ],
-                "security": [{"bearerAuth": []}],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [],
                 "responses": {
                     "200": {
@@ -134,6 +138,143 @@
                     },
                     "400": {
                         "description": "Error creating user."
+                    },
+                    "500": {
+                        "description": "Internal server error."
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "description": "API route that returns the user by id <strong>(*Admin account required)</strong>",
+                "sumary": "Return user by id",
+                "tags": [
+                    "Users"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the user to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "mongoid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success."
+                    },
+                    "400": {
+                        "description": "User not found."
+                    },
+                    "403": {
+                        "description": "Forbidden."
+                    },
+                    "500": {
+                        "description": "Internal Server Error."
+                    }
+                }
+            },
+            "put": {
+                "description": "API route responsible for performing user updates <strong>(*Admin account required)</strong>",
+                "sumary": "Route to update users",
+                "tags": [
+                    "Users"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the user to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "mongoid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "Test",
+                                    "email": "teste@email.com"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User updated successfully."
+                    },
+                    "400": {
+                        "description": "User not found."
+                    },
+                    "403": {
+                        "description": "Forbidden."
+                    },
+                    "500": {
+                        "description": "Internal server error."
+                    }
+                }
+            },
+            "delete": {
+                "description": "API route responsible for deleting a user <strong>(*Admin account required)</strong>",
+                "sumary": "Route to delete users",
+                "tags": [
+                    "Users"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the user to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "mongoid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User deleted successfully."
+                    },
+                    "400": {
+                        "description": "User not found. | Invalid ID."
+                    },
+                    "403": {
+                        "description": "Forbidden."
                     },
                     "500": {
                         "description": "Internal server error."

@@ -46,7 +46,7 @@ exports.create = async (req, res) => {
                         })
                     } else {
                         res.status(400).json({
-                            message: "ShortLink already exists"
+                            message: "ShortLink already exists."
                         })
                     }
                 }

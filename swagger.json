@@ -271,13 +271,214 @@
                         "description": "User deleted successfully."
                     },
                     "400": {
-                        "description": "User not found. | Invalid ID."
+                        "description": "Invalid."
                     },
                     "403": {
                         "description": "Forbidden."
                     },
                     "500": {
                         "description": "Internal server error."
+                    }
+                }
+            }
+        },
+        "/ShortLinks": {
+            "post": {
+                "description": "API route responsible for creating shortened links",
+                "sumary": "Create shortLinks",
+                "tags": [
+                    "ShortLinks"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "originalLink": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "originalLink": "https://www.google.com"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ShortLink already exists."
+                    },
+                    "400": {
+                        "description": "Error creating shortLink."
+                    },
+                    "403": {
+                        "description": "Forbidden."
+                    },
+                    "500": {
+                        "description": "Internal server error."
+                    }
+                }
+            },
+            "get": {
+                "description": "API route responsible for bringing all shortened links",
+                "sumary": "Return shortLinks",
+                "tags": [
+                    "ShortLinks"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success."
+                    },
+                    "400": {
+                        "description": "ShortLinks not found."
+                    },
+                    "403": {
+                        "description": "Forbidden."
+                    },
+                    "500": {
+                        "description": "Internal Server Error."
+                    }
+                }
+            }
+        },
+        "/shortLinks/{hash}": {
+            "get": {
+                "description": "API route responsible for redirecting the user to the original link",
+                "sumary": "Redirects to another page",
+                "tags": [
+                    "ShortLinks"
+                ],
+                "parameters": [
+                    {
+                        "name": "hash",
+                        "in": "path",
+                        "description": "The hash",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "nanoid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success."
+                    },
+                    "301": {
+                        "description": "Redirect the user to the specified URL",
+                        "headers": {
+                            "Location": {
+                                "description": "The URL to redirect the user to",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "https://github.com/devwander"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "The content type of the response",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "text/html; charset=utf-8"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ShortLink not found."
+                    },
+                    "500": {
+                        "description": "Internal Server Error."
+                    }
+                }
+            },
+            "delete": {
+                "description": "API route responsible for deleting a shortened link <strong>(*You must be the creator of the link)</strong>",
+                "sumary": "Route to delete shortLinks",
+                "tags": [
+                    "ShortLinks"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "hash",
+                        "in": "path",
+                        "description": "The hash",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "nanoid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ShortLink deleted successfully."
+                    },
+                    "400": {
+                        "description": "Invalid."
+                    },
+                    "403": {
+                        "description": "Forbidden."
+                    },
+                    "500": {
+                        "description": "Internal server error."
+                    }
+                }
+            }
+        },
+        "/shortLinks/user/{id}": {
+            "get": {
+                "description": "API route responsible for returning all shortened links registered by the user <strong>(*Admin account required)</strong>",
+                "sumary": "Return shortLinks by id",
+                "tags": [
+                    "ShortLinks"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the user to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "mongoid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success."
+                    },
+                    "400": {
+                        "description": "Invalid."
+                    },
+                    "403": {
+                        "description": "Forbidden."
+                    },
+                    "500": {
+                        "description": "Internal Server Error."
                     }
                 }
             }

@@ -2,10 +2,13 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const swaggerUI = require('swagger-ui-express')
 const swaggerDocument = require('../swagger.json')
+const cors = require('cors')
 require('dotenv').config()
 
 const app = express()
 const port = process.env.PORT
+
+app.use(cors())
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
